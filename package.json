@@ -1,0 +1,85 @@
+{
+  "name": "alloy-support",
+	"displayName": "alloy-support",
+	"description": "Support for the Alloy modelling language",
+	"version": "0.0.1",
+	"repository": {
+        "type": "git",
+        "url": "https://github.com/migue/alloy-support"
+    },
+	"engines": {
+		"vscode": "^1.68.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:alloy",
+        "onCommand:alloy-support.listCommands",
+		"onCommand:alloy-support.openAlloyEditor",
+		"alloy-support.openLatestInstance"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"languages": [
+            {
+                "id": "alloy",
+                "aliases": [
+                    "Alloy",
+                    "alloy"
+                ],
+                "extensions": [
+                    ".als"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+		"commands": [
+            {
+                "command": "alloy-support.openAlloyEditor",
+                "title": "Open Editor",
+                "category": "Alloy"
+            },
+            {
+                "command": "alloy-support.listCommands",
+                "title": "List Commands",
+                "category": "Alloy"
+            },
+			{
+                "command": "alloy-support.openLatestInstance",
+                "title": "Open Latest Instance",
+                "category": "Alloy"
+            }		]
+	},
+	"grammars": [
+		{
+			"language": "alloy",
+			"scopeName": "source.als",
+			"path": "./syntax/alloy.tmLanguage.json"
+		}
+	],
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.68.0",
+		"@types/glob": "^7.2.0",
+		"@types/mocha": "^9.1.1",
+		"@types/node": "16.x",
+		"@typescript-eslint/eslint-plugin": "^5.30.0",
+		"@typescript-eslint/parser": "^5.30.0",
+		"eslint": "^8.18.0",
+		"glob": "^8.0.3",
+		"mocha": "^10.0.0",
+		"typescript": "^4.7.4",
+		"@vscode/test-electron": "^2.1.5"
+	},
+	"dependencies": {
+        "vscode-languageclient": "^4.4.2"
+    }
+}
